@@ -4,7 +4,6 @@ const works = await reponse.json();
 function genererWork(works) {
 
     for (let i = 0; i < works.length; i++) {
-
         const article = works[i];
         const sectionFiches = document.querySelector(".gallery");
         const worksElements = document.createElement("figure");
@@ -37,8 +36,9 @@ function genererCategories(works) {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('filter-button');
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (works) => {
             console.log('Catégorie sélectionnée:', category);
+            return (work => work.category.name === categorieSelectionnee)
         });
         parentElement.appendChild(button);
     });
