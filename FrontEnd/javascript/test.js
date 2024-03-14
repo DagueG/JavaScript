@@ -20,33 +20,36 @@ function genererWork(works) {
 
 function genererCategories(works) {
 
+    // lister les catégories
     const categoriesSet = new Set();
     for (let i = 0; i < works.length; i++) {
         const ActualCategorie = works[i].category.name
         categoriesSet.add(ActualCategorie);
     }
 
+    // Ajouter l'élément parent
     const parentElement = document.createElement('div');
-
-    // Ajouter une classe à l'élément parent pour le style CSS
     parentElement.classList.add('categories-container');
 
-    // Parcourir chaque catégorie et créer un bouton pour chaque catégorie
+
+    // Creer les boutons
+    const worksData = [...works];
     categoriesSet.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('filter-button');
+
         button.addEventListener('click', (works) => {
-            console.log('Catégorie sélectionnée:', category);
-            return (work => work.category.name === categorieSelectionnee)
+            const worksFiltered = worksData.filter(work => work.category.name === category);
+            document.querySelector(".gallery").innerHTML = "";
+            genererWork(worksFiltered);
+        
         });
         parentElement.appendChild(button);
     });
 
-    // Sélectionner l'élément où vous souhaitez ajouter le parent
+    // Afficher les bouttons
     const h2Element = document.getElementById('portfolio').querySelector('h2');
-
-    // Insérer l'élément parent juste après l'élément <h2>
     h2Element.insertAdjacentElement('afterend', parentElement);
 }
 
