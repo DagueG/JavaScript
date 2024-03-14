@@ -186,3 +186,23 @@ footer nav ul {
 	margin: 2em
 }
 
+.categories-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espace entre les boutons */
+}
+
+.filter-button {
+    background-color: white;
+    color: #1D6154;
+	border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.filter-button.selected {
+    background-color: #1D6154;
+    color: white;
+
+}

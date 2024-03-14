@@ -19,9 +19,9 @@ function genererWork(works) {
 }
 
 function genererCategories(works) {
-
     // lister les catégories
     const categoriesSet = new Set();
+    categoriesSet.add('Tous');
     for (let i = 0; i < works.length; i++) {
         const ActualCategorie = works[i].category.name
         categoriesSet.add(ActualCategorie);
@@ -31,24 +31,37 @@ function genererCategories(works) {
     const parentElement = document.createElement('div');
     parentElement.classList.add('categories-container');
 
-
-    // Creer les boutons
+    // Créer les boutons
     const worksData = [...works];
     categoriesSet.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('filter-button');
 
-        button.addEventListener('click', (works) => {
-            const worksFiltered = worksData.filter(work => work.category.name === category);
+        button.addEventListener('click', () => {
+            //mettre la classe 'selected' sur le boutton cliqué
+            const buttons = document.querySelectorAll('.filter-button');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            // Ajouter la classe 'selected' uniquement au bouton cliqué
+            button.classList.add('selected');
+            
+            //filtrer les elements
+            let worksFiltered;
+            if (category === 'Tous') {
+                worksFiltered = worksData;
+            } else {
+                worksFiltered = worksData.filter(work => work.category.name === category);
+            }
             document.querySelector(".gallery").innerHTML = "";
             genererWork(worksFiltered);
-        
         });
         parentElement.appendChild(button);
     });
 
-    // Afficher les bouttons
+    // Afficher les boutons
     const h2Element = document.getElementById('portfolio').querySelector('h2');
     h2Element.insertAdjacentElement('afterend', parentElement);
 }
