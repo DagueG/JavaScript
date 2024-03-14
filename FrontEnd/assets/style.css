@@ -190,19 +190,22 @@ footer nav ul {
     display: flex;
     justify-content: center;
     gap: 10px; /* Espace entre les boutons */
+	padding-top: 20px;
+	padding-bottom: 50px;
 }
 
 .filter-button {
+	font-size: 16px;
+	font-weight: 700;
     background-color: white;
     color: #1D6154;
 	border: 1px solid #1D6154;
     border-radius: 60px;
-    padding: 10px 20px;
+    padding: 10px 30px;
     cursor: pointer;
 }
 
 .filter-button.selected {
     background-color: #1D6154;
     color: white;
-
 }
