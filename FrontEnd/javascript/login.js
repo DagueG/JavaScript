@@ -1,9 +1,9 @@
 const loginFormHTML = `
     <div id="loginForm">
         <h2>Login</h2>
-        <label for="email">Email:</label>
+        <label for="email">E-mail</label>
         <input type="email" id="IDemail" name="email" required><br>
-        <label for="password">Password:</label>
+        <label for="password">Mot de passe</label>
         <input type="password" id="IDpassword" name="password" required><br>
         <button id="loginSubmitBtn" type="button">Login</button>
     </div>

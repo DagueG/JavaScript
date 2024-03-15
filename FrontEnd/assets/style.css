@@ -213,3 +213,38 @@ footer nav ul {
 #login-btn.selected {
     font-weight: bold;
 }
+
+#loginForm {
+	width: 33%; /* Largeur du formulaire */
+    margin: 0 auto; /* Centre le formulaire horizontalement */
+    text-align: center; /* Centre le texte à l'intérieur du formulaire */
+    padding: 20px; /* Espacement intérieur du formulaire */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#loginForm label {
+    text-align: left; /* Aligner le texte à gauche */
+}
+
+#loginForm input[type="email"],
+#loginForm input[type="password"] {
+    width: 100%; /* Largeur des champs */
+    margin-bottom: 15px; /* Espacement entre chaque champ */
+    padding: 10px; /* Espacement intérieur des champs */
+    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur */
+	border: none;
+    box-shadow: 0px 4px 14px 0px #00000017; /* Ajoute une ombre aux champs */
+}
+
+#loginForm button {
+	font-size: 16px;
+	font-weight: 700;
+    background-color: #1D6154;
+    color: white;
+	border: 1px solid #1D6154;
+    border-radius: 60px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
