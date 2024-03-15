@@ -209,3 +209,7 @@ footer nav ul {
     background-color: #1D6154;
     color: white;
 }
+
+#login-btn.selected {
+    font-weight: bold;
+}
