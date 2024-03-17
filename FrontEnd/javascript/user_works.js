@@ -2,7 +2,6 @@ const reponse = await fetch('http://localhost:5678/api/works');
 const works = await reponse.json();
 
 function genererWork(works) {
-
     for (let i = 0; i < works.length; i++) {
         const article = works[i];
         const sectionFiches = document.querySelector(".gallery");

@@ -2,7 +2,6 @@ function editPageModifications() {
     const loginBtn = document.getElementById('login-btn');
     const headerSection = document.getElementById('project_header');
 
-    //modifier le boutton login
     loginBtn.innerText = 'logout'
 
     // Créer le bouton "Modifier"
@@ -11,7 +10,7 @@ function editPageModifications() {
     editButton.id = 'editButton';
     // Ajouter un gestionnaire d'événements pour le clic sur le bouton "Modifier"
     editButton.addEventListener('click', function() {
-        // Mettre en œuvre votre logique de modification ici
+        // interfaceEdit();
         alert('Implémentez votre logique de modification ici');
     });
 
@@ -20,20 +19,15 @@ function editPageModifications() {
     h2Element.parentNode.insertBefore(editButton, h2Element.nextSibling);
 }
 
-// Vérifie si l'utilisateur est connecté en consultant le cookie ou le localStorage
 function isUserLoggedIn() {
-    // Vérifiez si le jeton d'authentification est présent dans le cookie ou le localStorage
     const token = getTokenFromCookie();
-    return !!token; // Renvoie true si un jeton est présent, sinon false
+    return !!token;
 }
 
-// Fonction pour sauvegarder le jeton d'authentification dans un cookie sécurisé
 function saveTokenToCookie(token) {
-    // Définir la durée de validité du cookie (par exemple, 7 jours)
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
 
-    // Créer le cookie avec le jeton d'authentification
     document.cookie = `authToken=${token}; expires=${expirationDate.toUTCString()}; path=/; Secure; SameSite=Strict`;
 }
 
@@ -130,6 +124,7 @@ function toggleLoginForm() {
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('login-btn');
     loginBtn.addEventListener('click', () => {
+        console.log("lol");
         toggleLoginForm(loginBtn);
     });
 });
