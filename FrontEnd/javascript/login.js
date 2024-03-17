@@ -1,3 +1,62 @@
+function editPageModifications() {
+    const loginBtn = document.getElementById('login-btn');
+    const headerSection = document.getElementById('project_header');
+
+    //modifier le boutton login
+    loginBtn.innerText = 'logout'
+
+    // Créer le bouton "Modifier"
+    const editButton = document.createElement('button');
+    editButton.textContent = 'modifier';
+    editButton.id = 'editButton';
+    // Ajouter un gestionnaire d'événements pour le clic sur le bouton "Modifier"
+    editButton.addEventListener('click', function() {
+        // Mettre en œuvre votre logique de modification ici
+        alert('Implémentez votre logique de modification ici');
+    });
+
+    // Insérer le bouton "Modifier" juste après le titre <h2> dans la section "project_header"
+    const h2Element = headerSection.querySelector('h2');
+    h2Element.parentNode.insertBefore(editButton, h2Element.nextSibling);
+}
+
+// Vérifie si l'utilisateur est connecté en consultant le cookie ou le localStorage
+function isUserLoggedIn() {
+    // Vérifiez si le jeton d'authentification est présent dans le cookie ou le localStorage
+    const token = getTokenFromCookie();
+    return !!token; // Renvoie true si un jeton est présent, sinon false
+}
+
+// Fonction pour sauvegarder le jeton d'authentification dans un cookie sécurisé
+function saveTokenToCookie(token) {
+    // Définir la durée de validité du cookie (par exemple, 7 jours)
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+
+    // Créer le cookie avec le jeton d'authentification
+    document.cookie = `authToken=${token}; expires=${expirationDate.toUTCString()}; path=/; Secure; SameSite=Strict`;
+}
+
+// Fonction pour récupérer le jeton d'authentification depuis le cookie
+function getTokenFromCookie() {
+    // Récupérer tous les cookies
+    const cookies = document.cookie.split(';');
+
+    // Parcourir les cookies pour trouver le cookie contenant le jeton d'authentification
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+
+        // Vérifier si le cookie commence par "authToken="
+        if (cookie.startsWith('authToken=')) {
+            // Extraire et retourner le jeton d'authentification
+            return cookie.substring('authToken='.length, cookie.length);
+        }
+    }
+
+    // Retourner null si le cookie n'est pas trouvé
+    return null;
+}
+
 const loginFormHTML = `
     <div id="loginForm">
         <h2>Login</h2>
@@ -22,9 +81,12 @@ function loginUser() {
     })
     .then(response => response.json())
     .then(data => {
+        saveTokenToCookie(data.token)
         // Gérer la réponse, par exemple, stocker le jeton
-        console.log('Token:', data.token);
-        // Vous pouvez effectuer d'autres actions en fonction de la réponse ici
+        console.log('Token:', getTokenFromCookie());
+        // Remmetre la page par défaut
+        toggleLoginForm();
+        editPageModifications();
     })
     .catch(error => {
         console.error('Error:', error);
@@ -36,6 +98,8 @@ function toggleLoginForm() {
     const mainContent = document.querySelector('main');
     const children = mainContent.children;
     let childrenHidden = false;
+    const loginBtn = document.getElementById('login-btn');
+    loginBtn.classList.toggle('selected')
 
     // Vérifie si les enfants de main sont cachés
     for (let i = 0; i < children.length; i++) {
@@ -66,7 +130,6 @@ function toggleLoginForm() {
 document.addEventListener('DOMContentLoaded', function() {
     const loginBtn = document.getElementById('login-btn');
     loginBtn.addEventListener('click', () => {
-        loginBtn.classList.toggle('selected')
-        toggleLoginForm();
+        toggleLoginForm(loginBtn);
     });
 });

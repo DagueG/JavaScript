@@ -123,7 +123,6 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
 .gallery {
 	width: 100%;
@@ -247,4 +246,25 @@ footer nav ul {
     border-radius: 60px;
     padding: 10px 30px;
     cursor: pointer;
+}
+
+nav li:hover {
+    cursor: pointer;
+}
+
+#project_header {
+	display: flex;
+	justify-content: center;
+	gap: 30px; /* Marge à gauche pour séparer le bouton "Modifier" du titre */
+	margin-top: 4em;
+	margin-bottom: 4em;
+}
+
+#editButton {
+	background-color: transparent; /* Supprime le fond */
+    border: none; /* Supprime la bordure */
+}
+
+#editButton:hover {
+	cursor: pointer;
 }

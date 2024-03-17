@@ -37,7 +37,9 @@ function genererCategories(works) {
         const button = document.createElement('button');
         button.textContent = category;
         button.classList.add('filter-button');
-
+        if (category === 'Tous') {
+            button.classList.add('selected');
+        }
         button.addEventListener('click', () => {
             //mettre la classe 'selected' sur le boutton cliqué
             const buttons = document.querySelectorAll('.filter-button');
@@ -62,8 +64,8 @@ function genererCategories(works) {
     });
 
     // Afficher les boutons
-    const h2Element = document.getElementById('portfolio').querySelector('h2');
-    h2Element.insertAdjacentElement('afterend', parentElement);
+    const project_header = document.getElementById('project_header');
+    project_header.insertAdjacentElement('afterend', parentElement);
 }
 
 genererWork(works);
