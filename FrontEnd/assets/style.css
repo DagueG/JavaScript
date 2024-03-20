@@ -268,3 +268,79 @@ nav li:hover {
 #editButton:hover {
 	cursor: pointer;
 }
+
+.image-modal {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    width: 33%;
+    height: 50%;
+    transform: translate(-50%, -50%); 
+    background-color: white; 
+    padding: 5%; 
+	border-radius: 10px;
+	text-align: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    z-index: 0; /* Assure que l'overlay soit au-dessus des autres éléments */
+    pointer-events: auto; /* Permet aux événements de pointer d'interagir avec cet élément */
+}
+
+.modal-images-list {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.image-container {
+    position: relative; /* Nécessaire pour positionner le bouton de suppression de manière absolue */
+    margin: 15px 5px; /* Marge autour de chaque image */
+}
+
+.image-modal img {
+    height: 100px; /* Largeur de chaque image */
+}
+
+.delete-button {
+    position: absolute;
+    top: 0px; /* Décalage de 5px du haut de l'image */
+    right: 0px; /* Décalage de 5px du côté droit de l'image */
+    background: none; /* Supprimer le fond du bouton */
+    cursor: pointer; /* Curseur de type pointeur pour indiquer la possibilité de cliquer */
+}
+
+.modal-add-button {
+    margin-top: auto; /* Aligner en bas */
+    align-self: center; /* Centrer horizontalement */
+    border: none;
+    background-color: #1D6154;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 60px;
+    cursor: pointer;
+}
+
+.modal-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 20px 25px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: 30px;
+	color: #000;
+  }
+  
+  .modal-close-button:hover {
+	color: #f00; /* Couleur de survol */
+  }
+  
