@@ -4,8 +4,9 @@ export function showAddPhotoModal() {
 
     const modalImage = document.querySelector('.image-modal');
 
-    var backButton = document.createElement('button');
+    var backButton = document.createElement('img');
     backButton.classList.add('back-button')
+    backButton.src = './assets/icons/arrow-left-solid.svg';
     backButton.onclick = function() {
         // Revenir à la modal précédente
         document.querySelector('.overlay').remove();
