@@ -338,9 +338,17 @@ nav li:hover {
 	cursor: pointer;
 	font-size: 30px;
 	color: #000;
-  }
+}
   
-  .modal-close-button:hover {
+.modal-close-button:hover {
 	color: #f00; /* Couleur de survol */
-  }
+}
   
+.back-button {
+    background-image: url('./icons/arrow-left-solid.svg');
+    background-repeat: no-repeat;
+	width: 20px;
+	height: 20px;
+    background-size: 20px; /* Ajustez la taille selon vos besoins */
+    padding-left: 25px; /* Pour créer de l'espace à gauche de la flèche */
+}

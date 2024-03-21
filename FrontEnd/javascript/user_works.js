@@ -1,5 +1,7 @@
+import { showAddPhotoModal } from './photo_add.js'
+
 const reponse = await fetch('http://localhost:5678/api/works');
-const works = await reponse.json();
+export const works = await reponse.json();
 
 function eventLogin(works) {
     const loginBtn = document.getElementById('login-btn');
@@ -74,7 +76,7 @@ function genererCategories(works) {
     project_header.insertAdjacentElement('afterend', parentElement);
 }
 
-function showImageModal(works) {    
+export function showImageModal(works) {    
     // Créer un élément de modal
     var modal = document.createElement('div');
     modal.classList.add('image-modal');
@@ -127,9 +129,9 @@ function showImageModal(works) {
     var addPicButton = document.createElement('button');
     addPicButton.innerText = 'Ajouter une photo';
     addPicButton.classList.add('modal-add-button');
-    addPicButton.onclick = function() {
-        console.log('test1');
-    };
+    addPicButton.addEventListener('click', () => {
+        showAddPhotoModal(works);
+    });
     modal.appendChild(addPicButton);
 
     // Créer un overlay
