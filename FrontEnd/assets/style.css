@@ -278,12 +278,15 @@ nav li:hover {
     top: 50%; 
     left: 50%; 
     width: 33%;
-    height: 50%;
+    height: 80%;
     transform: translate(-50%, -50%); 
     background-color: white; 
-    padding: 5%; 
+    padding: 3% 4%; 
 	border-radius: 10px;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 }
 
 .overlay {
@@ -297,15 +300,20 @@ nav li:hover {
     pointer-events: auto; /* Permet aux événements de pointer d'interagir avec cet élément */
 }
 
+.modal-title {
+}
+
 .modal-images-list {
     display: flex;
     flex-wrap: wrap;
-
+	overflow: scroll;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #B3B3B3;
+	gap: 20px 10px;
 }
 
 .image-container {
     position: relative; /* Nécessaire pour positionner le bouton de suppression de manière absolue */
-    margin: 15px 5px; /* Marge autour de chaque image */
 }
 
 .image-modal img {
@@ -334,14 +342,28 @@ nav li:hover {
 
 .modal-close-button {
 	position: absolute;
-	top: 0;
-	right: 0;
-	padding: 20px 25px;
+	top: 20px;
+	right: 25px;
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 	font-size: 30px;
 	color: #000;
+}
+
+.back-button {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	font-size: 30px;
+	color: #000;
+}
+.back-button img {
+	width: 21px;
+	height: 21px;
 }
   
 .modal-close-button:hover {
