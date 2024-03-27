@@ -6,13 +6,9 @@ export function showAddPhotoModal() {
 
     var backButton = document.createElement('button');
     backButton.classList.add('back-button');
-
-    // Créer un élément <span> pour le symbole de la flèche
     var arrowSpan = document.createElement('img');
     arrowSpan.src = './assets/icons/arrow-left-solid.svg';
-
     backButton.appendChild(arrowSpan);
-
     // Écouteur d'événement sur le bouton
     backButton.onclick = function() {
         // Revenir à la modal précédente
@@ -20,7 +16,37 @@ export function showAddPhotoModal() {
         modalImage.remove();
         showImageModal(works);
     };
-
-    // Insérer le bouton avant le premier enfant de la modal
     modalImage.insertBefore(backButton, modalImage.firstChild);
+
+    var title = document.querySelector('.modal-title');
+    title.textContent = "Ajout photo"
+
+    var AddPhotoForm = document.createElement('form');
+    const AddPhotoFormHTML = `
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="photo" accept="image/*"><br><br>
+
+        <label for="titre">Titre:</label>
+        <input type="text" id="titre" name="titre"><br><br>
+
+        <label for="categorie">Catégorie:</label>
+        <select id="categorie" name="categorie">
+            <option value="categorie1">Catégorie 1</option>
+            <option value="categorie2">Catégorie 2</option>
+            <option value="categorie3">Catégorie 3</option>
+        </select><br><br>
+
+        <input type="submit" value="Valider">
+`;
+    AddPhotoForm.classList.add("AddPhotoForm");
+    AddPhotoForm.action = "#";
+    AddPhotoForm.method = "post";
+    AddPhotoForm.enctype = "multipart/form-data";
+    AddPhotoForm.innerHTML = AddPhotoFormHTML;
+    modalImage.insertBefore(AddPhotoForm, document.querySelector('.modal-images-list'));
+
+    document.querySelector('.modal-images-list').remove();
+    document.querySelector('.modal-add-button').remove();
+    
+
 }
