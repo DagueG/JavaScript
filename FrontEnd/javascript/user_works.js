@@ -18,6 +18,7 @@ function genererWork(works) {
         const imageElements = document.createElement("img");
         const figcaptionElements = document.createElement("figcaption")
         imageElements.src = article.imageUrl;
+        worksElements.dataset.id = article.id;
         imageElements.alt = article.title;
         figcaptionElements.innerText = article.title;
         sectionFiches.appendChild(worksElements);
@@ -104,7 +105,7 @@ export function showImageModal(works) {
     for (var i = 0; i < works.length; i++) {
         var imageContainer = document.createElement('div');
         imageContainer.classList.add('image-container');
-
+        imageContainer.dataset.id = works[i].id;
         var img = document.createElement('img');
         img.src = works[i].imageUrl;
         imageContainer.appendChild(img);
@@ -115,8 +116,8 @@ export function showImageModal(works) {
         deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
         deleteButton.onclick = function() {
             // Envoyer une requête de suppression à la base de données
-            var imageSrc = this.parentElement.querySelector('img').src;
-            deleteImageFromDatabase(imageSrc);
+            var worksID = this.parentElement.dataset.id;
+            deleteImageFromDatabase(worksID);
             // Supprimer l'image du DOM
             this.parentElement.remove();
         };
@@ -143,9 +144,24 @@ export function showImageModal(works) {
     document.body.appendChild(modal);
 }
 
-function deleteImageFromDatabase(imageSrc) {
+function deleteImageFromDatabase(worksID) {
+    const token = getTokenFromCookie();
     // Code pour envoyer une requête de suppression à la base de données
-    console.log('Image supprimée de la base de données:', imageSrc);
+    fetch('http://localhost:5678/api/works/' + worksID, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erreur lors de la suppression de l\'image');
+        }
+        console.log('Image supprimée avec succès.');
+    })
+    .catch(error => {
+        console.error('Erreur :', error);
+    });
 }
 
 function editPageModifications(works) {
@@ -183,7 +199,7 @@ function saveTokenToCookie(token) {
 }
 
 // Fonction pour récupérer le jeton d'authentification depuis le cookie
-function getTokenFromCookie() {
+export function getTokenFromCookie() {
     // Récupérer tous les cookies
     const cookies = document.cookie.split(';');
 
@@ -227,9 +243,6 @@ function loginUser(works) {
     .then(response => response.json())
     .then(data => {
         saveTokenToCookie(data.token)
-        // Gérer la réponse, par exemple, stocker le jeton
-        console.log('Token:', getTokenFromCookie());
-        // Remmetre la page par défaut
         toggleLoginForm(works);
         editPageModifications(works);
     })

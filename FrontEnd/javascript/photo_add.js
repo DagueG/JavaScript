@@ -1,4 +1,4 @@
-import { works, showImageModal } from './user_works.js'
+import { works, showImageModal, getTokenFromCookie } from './user_works.js'
 
 export function showAddPhotoModal() {
 
@@ -24,20 +24,21 @@ export function showAddPhotoModal() {
     var AddPhotoForm = document.createElement('form');
     const AddPhotoFormHTML = `
         <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="photo" accept="image/*"><br><br>
-
+        <label for="photo">Photo:</label>
+        <input type="file" id="photo" name="image" accept="image/*"><br><br>
+    
         <label for="titre">Titre:</label>
-        <input type="text" id="titre" name="titre"><br><br>
-
+        <input type="text" id="titre" name="title"><br><br>
+    
         <label for="categorie">Catégorie:</label>
-        <select id="categorie" name="categorie">
-            <option value="categorie1">Catégorie 1</option>
-            <option value="categorie2">Catégorie 2</option>
-            <option value="categorie3">Catégorie 3</option>
+        <select id="categorie" name="category">
+            <option value="1">Catégorie 1</option>
+            <option value="2">Catégorie 2</option>
+            <option value="3">Catégorie 3</option>
         </select><br><br>
-
+    
         <input type="submit" value="Valider">
-`;
+        `;
     AddPhotoForm.classList.add("AddPhotoForm");
     AddPhotoForm.action = "#";
     AddPhotoForm.method = "post";
@@ -48,5 +49,37 @@ export function showAddPhotoModal() {
     document.querySelector('.modal-images-list').remove();
     document.querySelector('.modal-add-button').remove();
     
-
+    const token = getTokenFromCookie();
+    AddPhotoForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Empêcher l'action par défaut du formulaire
+    
+        // Récupérer les données du formulaire
+        var formData = new FormData(AddPhotoForm);
+        // Ajouter la variable token à la requête
+        formData.append('token', token);
+        // Créer un objet d'en-têtes
+        var headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + token);
+    
+        // Envoi de la requête AJAX
+        fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: headers,
+            body: formData,
+            redirect: "follow"
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erreur lors de la requête');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Gérer la réponse si nécessaire
+            console.log('Réponse du serveur :', data);
+        })
+        .catch(error => {
+            console.error('Erreur :', error);
+        });
+    });
 }
