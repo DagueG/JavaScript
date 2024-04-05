@@ -324,8 +324,13 @@ nav li:hover {
     position: absolute;
     top: 0px; /* Décalage de 5px du haut de l'image */
     right: 0px; /* Décalage de 5px du côté droit de l'image */
-    background: none; /* Supprimer le fond du bouton */
+    background: red; /* Supprimer le fond du bouton */
     cursor: pointer; /* Curseur de type pointeur pour indiquer la possibilité de cliquer */
+	width: 20px;
+	height: 20px;
+}
+
+.delete-button i {
 }
 
 .modal-add-button {

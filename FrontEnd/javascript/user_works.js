@@ -11,9 +11,10 @@ function eventLogin(works) {
 }
 
 function genererWork(works) {
+    const sectionFiches = document.querySelector(".gallery");
+    sectionFiches.innerHTML = "";
     for (let i = 0; i < works.length; i++) {
         const article = works[i];
-        const sectionFiches = document.querySelector(".gallery");
         const worksElements = document.createElement("figure");
         const imageElements = document.createElement("img");
         const figcaptionElements = document.createElement("figcaption")
@@ -111,15 +112,14 @@ export function showImageModal(works) {
         imageContainer.appendChild(img);
 
         // Créer un bouton de suppression pour chaque image
-        var deleteButton = document.createElement('button');
+        var deleteButton = document.createElement('div');
         deleteButton.classList.add('delete-button');
         deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-        deleteButton.onclick = function() {
-            // Envoyer une requête de suppression à la base de données
+        deleteButton.onclick = function(event) {
+            event.preventDefault(); // Empêcher le comportement par défaut du bouton
             var worksID = this.parentElement.dataset.id;
             deleteImageFromDatabase(worksID);
             // Supprimer l'image du DOM
-            this.parentElement.remove();
         };
         imageContainer.appendChild(deleteButton);
         modalImagesList.appendChild(imageContainer);
