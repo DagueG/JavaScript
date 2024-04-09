@@ -195,7 +195,7 @@ function saveTokenToCookie(token) {
     const expirationDate = new Date();
     expirationDate.setDate(expirationDate.getDate() + 7);
 
-    document.cookie = `authToken=${token}; expires=${expirationDate.toUTCString()}; path=/; Secure; SameSite=Strict`;
+    document.cookie = `authToken=${token}; expires=${expirationDate.toUTCString()}; path=/; SameSite=Strict`;
 }
 
 // Fonction pour récupérer le jeton d'authentification depuis le cookie
@@ -243,6 +243,8 @@ function loginUser(works) {
     .then(response => response.json())
     .then(data => {
         saveTokenToCookie(data.token)
+        console.log(getTokenFromCookie());
+        console.log("test");
         toggleLoginForm(works);
         editPageModifications(works);
     })
