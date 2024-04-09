@@ -62,6 +62,7 @@ export function showAddPhotoModal() {
         headers.append('Authorization', 'Bearer ' + token);
     
         // Envoi de la requête AJAX
+        console.log("plop0");
         fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: headers,
@@ -81,5 +82,11 @@ export function showAddPhotoModal() {
         .catch(error => {
             console.error('Erreur :', error);
         });
+        console.log("plop1");
+        modalImage.remove();
+        document.querySelector('.overlay').remove();
+        const reponse = fetch('http://localhost:5678/api/works');
+        works = reponse.json();
+        console.log("plop");
     });
 }
