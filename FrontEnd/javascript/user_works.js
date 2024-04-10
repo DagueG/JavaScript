@@ -1,12 +1,32 @@
 import { showAddPhotoModal } from './photo_add.js'
 
-const reponse = await fetch('http://localhost:5678/api/works');
-export const works = await reponse.json();
+export let works = await refreshWorks();
+
+async function refreshWorks() {
+    const response = await fetch('http://localhost:5678/api/works');
+    return await response.json();
+}
+
+export async function updateWorks() {
+    const updatedWorks = await refreshWorks();
+    if (updatedWorks) {
+        works = updatedWorks;
+        console.log("Works data has been updated successfully.");
+    } else {
+        console.error("Failed to update works data.");
+    }
+}
 
 function eventLogin(works) {
     const loginBtn = document.getElementById('login-btn');
     loginBtn.addEventListener('click', () => {
-        toggleLoginForm(works);
+        if (loginBtn.innerText === 'login') {
+            toggleLoginForm(works);
+        } else {
+            loginBtn.innerText = 'login'
+            const editButton = document.querySelector('#editButton');
+            editButton.remove();
+        }
     });    
 }
 
@@ -78,7 +98,7 @@ function genererCategories(works) {
     project_header.insertAdjacentElement('afterend', parentElement);
 }
 
-export function showImageModal(works) {    
+export async function showImageModal(works) {    
     // Créer un élément de modal
     var modal = document.createElement('div');
     modal.classList.add('image-modal');
@@ -115,11 +135,16 @@ export function showImageModal(works) {
         var deleteButton = document.createElement('div');
         deleteButton.classList.add('delete-button');
         deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
-        deleteButton.onclick = function(event) {
+        deleteButton.onclick = async function(event) {
             event.preventDefault(); // Empêcher le comportement par défaut du bouton
             var worksID = this.parentElement.dataset.id;
             deleteImageFromDatabase(worksID);
-            // Supprimer l'image du DOM
+            console.log(works);
+            await updateWorks();
+            console.log(works);
+            modal.remove();
+            overlay.remove();
+            showImageModal(works);
         };
         imageContainer.appendChild(deleteButton);
         modalImagesList.appendChild(imageContainer);
@@ -144,10 +169,10 @@ export function showImageModal(works) {
     document.body.appendChild(modal);
 }
 
-function deleteImageFromDatabase(worksID) {
+async function deleteImageFromDatabase(worksID) {
     const token = getTokenFromCookie();
     // Code pour envoyer une requête de suppression à la base de données
-    fetch('http://localhost:5678/api/works/' + worksID, {
+    await fetch('http://localhost:5678/api/works/' + worksID, {
         method: 'DELETE',
         headers: {
             'Authorization': 'Bearer ' + token
@@ -157,7 +182,6 @@ function deleteImageFromDatabase(worksID) {
         if (!response.ok) {
             throw new Error('Erreur lors de la suppression de l\'image');
         }
-        console.log('Image supprimée avec succès.');
     })
     .catch(error => {
         console.error('Erreur :', error);
@@ -188,7 +212,12 @@ function editPageModifications(works) {
 
 function isUserLoggedIn() {
     const token = getTokenFromCookie();
-    return !!token;
+    if (token) {
+        console.log("found token.")
+        editPageModifications(works);
+    } else {
+        console.log("No token provided.");
+    }
 }
 
 function saveTokenToCookie(token) {
@@ -229,7 +258,7 @@ const loginFormHTML = `
     </div>
 `;
 
-function loginUser(works) {
+async function loginUser(works) {
     const email = document.getElementById('IDemail').value;
     const password = document.getElementById('IDpassword').value;
     // Envoyer une requête POST à l'URL spécifiée
@@ -243,8 +272,6 @@ function loginUser(works) {
     .then(response => response.json())
     .then(data => {
         saveTokenToCookie(data.token)
-        console.log(getTokenFromCookie());
-        console.log("test");
         toggleLoginForm(works);
         editPageModifications(works);
     })
@@ -269,16 +296,14 @@ function toggleLoginForm(works) {
         }
     }
 
-    // Si les enfants sont cachés, les affiche et ajoute le formulaire de connexion
+    // Si les enfants sont cachés, les affiche et  supprime le formulaire de connexion
     if (childrenHidden) {
         for (let i = 0; i < children.length; i++) {
             children[i].style.display = '';
         }
         const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            loginForm.remove();
-        }
-    } else { // Sinon, cache les enfants et supprime le formulaire de connexion
+        loginForm.remove();
+    } else { // Sinon, cache les enfants et ajoute le formulaire de connexion
         for (let i = 0; i < children.length; i++) {
             children[i].style.display = 'none';
         }
@@ -293,3 +318,4 @@ function toggleLoginForm(works) {
 genererWork(works);
 genererCategories(works);
 eventLogin(works);
+isUserLoggedIn()

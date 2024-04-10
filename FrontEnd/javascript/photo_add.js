@@ -1,4 +1,4 @@
-import { works, showImageModal, getTokenFromCookie } from './user_works.js'
+import { works, showImageModal, getTokenFromCookie, updateWorks } from './user_works.js'
 
 export function showAddPhotoModal() {
 
@@ -50,7 +50,7 @@ export function showAddPhotoModal() {
     document.querySelector('.modal-add-button').remove();
     
     const token = getTokenFromCookie();
-    AddPhotoForm.addEventListener('submit', function(event) {
+    AddPhotoForm.addEventListener('submit', async function(event) {
         event.preventDefault(); // Empêcher l'action par défaut du formulaire
     
         // Récupérer les données du formulaire
@@ -62,8 +62,7 @@ export function showAddPhotoModal() {
         headers.append('Authorization', 'Bearer ' + token);
     
         // Envoi de la requête AJAX
-        console.log("plop0");
-        fetch('http://localhost:5678/api/works', {
+        await fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: headers,
             body: formData,
@@ -82,11 +81,11 @@ export function showAddPhotoModal() {
         .catch(error => {
             console.error('Erreur :', error);
         });
-        console.log("plop1");
-        modalImage.remove();
         document.querySelector('.overlay').remove();
-        const reponse = fetch('http://localhost:5678/api/works');
-        works = reponse.json();
-        console.log("plop");
+        modalImage.remove();
+        console.log(works);
+        updateWorks();
+        console.log(works);
+        showImageModal(works);
     });
 }
