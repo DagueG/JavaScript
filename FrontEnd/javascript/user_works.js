@@ -111,7 +111,7 @@ export async function showImageModal(works) {
 
         var deleteButton = document.createElement('div');
         deleteButton.classList.add('delete-button');
-        deleteButton.innerHTML = '<i class="fa-solid fa-trash"></i>';
+        deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
         deleteButton.onclick = async function(event) {
             event.preventDefault();
             var worksID = this.parentElement.dataset.id;
@@ -158,7 +158,7 @@ function editPageModifications(works) {
     loginBtn.innerText = 'logout'
 
     const editButton = document.createElement('button');
-    editButton.textContent = 'modifier';
+    editButton.innerHTML = '<i class="fa-solid fa-pen-to-square icon-modifier"></i> modifier'; // Adding the icon with the class
     editButton.id = 'editButton';
     editButton.addEventListener('click', function() {
         showImageModal(works);
@@ -168,7 +168,7 @@ function editPageModifications(works) {
     h2Element.parentNode.insertBefore(editButton, h2Element.nextSibling);
 }
 
-function isUserLoggedIn() {
+function isUserLoggedIn(works) {
     const token = getTokenFromCookie();
     if (token) {
         console.log("found token.")
@@ -270,5 +270,5 @@ fetchWorks().then(works => {
     genererWork(works);
     genererCategories(works);
     eventLogin(works);
-    isUserLoggedIn();
+    isUserLoggedIn(works);
 })

@@ -284,6 +284,10 @@ nav li:hover {
     border: none; /* Supprime la bordure */
 }
 
+.icon-modifier {
+    margin-right: 5px; /* Add a right margin to create space */
+}
+
 #editButton:hover {
 	cursor: pointer;
 }
@@ -337,15 +341,18 @@ nav li:hover {
 
 .delete-button {
     position: absolute;
-    top: 0px; /* Décalage de 5px du haut de l'image */
-    right: 0px; /* Décalage de 5px du côté droit de l'image */
-    background: red; /* Supprimer le fond du bouton */
+    top: 5px; /* Décalage de 5px du haut de l'image */
+    right: 5px; /* Décalage de 5px du côté droit de l'image */
     cursor: pointer; /* Curseur de type pointeur pour indiquer la possibilité de cliquer */
-	width: 20px;
-	height: 20px;
+	width: 17px;
+	height: 17px;
+	background-color: black; /* Set the background color to black */
+    color: white; /* Set the text color to white */
+	border-radius: 2px;
 }
 
 .delete-button i {
+	font-size: 11px;
 }
 
 .modal-add-button {
