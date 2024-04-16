@@ -1,21 +1,23 @@
 import { showAddPhotoModal } from './photo_add.js'
 
-export let works = await refreshWorks();
+// export let works = await fetchWorks();
 
-async function refreshWorks() {
+export async function fetchWorks() {
     const response = await fetch('http://localhost:5678/api/works');
-    return await response.json();
+    const works = await response.json();
+    localStorage.setItem("works", JSON.stringify(works));
+    return works;
 }
 
-export async function updateWorks() {
-    const updatedWorks = await refreshWorks();
-    if (updatedWorks) {
-        works = updatedWorks;
-        console.log("Works data has been updated successfully.");
-    } else {
-        console.error("Failed to update works data.");
-    }
-}
+// export async function updateWorks() {
+//     const updatedWorks = await refreshWorks();
+//     if (updatedWorks) {
+//         works = updatedWorks;
+//         console.log("Works data has been updated successfully.");
+//     } else {
+//         console.error("Failed to update works data.");
+//     }
+// }
 
 function eventLogin(works) {
     const loginBtn = document.getElementById('login-btn');
@@ -138,10 +140,8 @@ export async function showImageModal(works) {
         deleteButton.onclick = async function(event) {
             event.preventDefault(); // Empêcher le comportement par défaut du bouton
             var worksID = this.parentElement.dataset.id;
-            deleteImageFromDatabase(worksID);
-            console.log(works);
-            await updateWorks();
-            console.log(works);
+            await deleteImageFromDatabase(worksID);
+            const works = await fetchWorks();
             modal.remove();
             overlay.remove();
             showImageModal(works);
@@ -178,14 +178,6 @@ async function deleteImageFromDatabase(worksID) {
             'Authorization': 'Bearer ' + token
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Erreur lors de la suppression de l\'image');
-        }
-    })
-    .catch(error => {
-        console.error('Erreur :', error);
-    });
 }
 
 function editPageModifications(works) {
@@ -314,8 +306,9 @@ function toggleLoginForm(works) {
     }
 }
 
-
-genererWork(works);
-genererCategories(works);
-eventLogin(works);
-isUserLoggedIn()
+fetchWorks().then(works => {
+    genererWork(works);
+    genererCategories(works);
+    eventLogin(works);
+    isUserLoggedIn();
+})

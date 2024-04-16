@@ -1,4 +1,4 @@
-import { works, showImageModal, getTokenFromCookie, updateWorks } from './user_works.js'
+import { showImageModal, getTokenFromCookie, fetchWorks } from './user_works.js'
 
 export function showAddPhotoModal() {
 
@@ -14,6 +14,7 @@ export function showAddPhotoModal() {
         // Revenir à la modal précédente
         document.querySelector('.overlay').remove();
         modalImage.remove();
+        const works = JSON.parse(localStorage.getItem("works"));
         showImageModal(works);
     };
     modalImage.insertBefore(backButton, modalImage.firstChild);
@@ -25,10 +26,10 @@ export function showAddPhotoModal() {
     const AddPhotoFormHTML = `
         <label for="photo">Photo:</label>
         <label for="photo">Photo:</label>
-        <input type="file" id="photo" name="image" accept="image/*"><br><br>
+        <input type="file" id="photo" name="image" accept="image/*" required><br><br>
     
         <label for="titre">Titre:</label>
-        <input type="text" id="titre" name="title"><br><br>
+        <input type="text" id="titre" name="title" required><br><br>
     
         <label for="categorie">Catégorie:</label>
         <select id="categorie" name="category">
@@ -68,24 +69,9 @@ export function showAddPhotoModal() {
             body: formData,
             redirect: "follow"
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Erreur lors de la requête');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Gérer la réponse si nécessaire
-            console.log('Réponse du serveur :', data);
-        })
-        .catch(error => {
-            console.error('Erreur :', error);
-        });
         document.querySelector('.overlay').remove();
         modalImage.remove();
-        console.log(works);
-        updateWorks();
-        console.log(works);
+        const works = await fetchWorks();
         showImageModal(works);
     });
 }
