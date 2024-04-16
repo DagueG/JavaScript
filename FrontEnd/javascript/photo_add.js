@@ -9,9 +9,7 @@ export function showAddPhotoModal() {
     var arrowSpan = document.createElement('img');
     arrowSpan.src = './assets/icons/arrow-left-solid.svg';
     backButton.appendChild(arrowSpan);
-    // Écouteur d'événement sur le bouton
     backButton.onclick = function() {
-        // Revenir à la modal précédente
         document.querySelector('.overlay').remove();
         modalImage.remove();
         const works = JSON.parse(localStorage.getItem("works"));
@@ -52,17 +50,12 @@ export function showAddPhotoModal() {
     
     const token = getTokenFromCookie();
     AddPhotoForm.addEventListener('submit', async function(event) {
-        event.preventDefault(); // Empêcher l'action par défaut du formulaire
-    
-        // Récupérer les données du formulaire
+        event.preventDefault();
         var formData = new FormData(AddPhotoForm);
-        // Ajouter la variable token à la requête
         formData.append('token', token);
-        // Créer un objet d'en-têtes
         var headers = new Headers();
         headers.append('Authorization', 'Bearer ' + token);
     
-        // Envoi de la requête AJAX
         await fetch('http://localhost:5678/api/works', {
             method: 'POST',
             headers: headers,

@@ -56,6 +56,7 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
@@ -200,7 +201,7 @@ footer nav ul {
 .filter-button {
 	font-size: 16px;
 	font-weight: 700;
-    background-color: white;
+    background-color: #FFFEF8;
     color: #1D6154;
 	border: 1px solid #1D6154;
     border-radius: 60px;
@@ -210,7 +211,7 @@ footer nav ul {
 
 .filter-button.selected {
     background-color: #1D6154;
-    color: white;
+    color: #FFFEF8;
 }
 
 #login-btn.selected {
@@ -222,9 +223,21 @@ footer nav ul {
     margin: 0 auto; /* Centre le formulaire horizontalement */
     text-align: center; /* Centre le texte à l'intérieur du formulaire */
     padding: 20px; /* Espacement intérieur du formulaire */
+	gap: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+	color: #3D3D3D;
+	font-weight: 500;
+}
+
+#loginForm a {
+	padding-top: 20px;
+	color: #3D3D3D;
+}
+
+#loginForm h2 {
+	padding-bottom:  20px;
 }
 
 #loginForm label {
@@ -242,6 +255,7 @@ footer nav ul {
 }
 
 #loginForm button {
+	align-self: center;
 	font-size: 16px;
 	font-weight: 700;
     background-color: #1D6154;
@@ -250,6 +264,7 @@ footer nav ul {
     border-radius: 60px;
     padding: 10px 30px;
     cursor: pointer;
+	width: 50%;
 }
 
 nav li:hover {
@@ -280,7 +295,7 @@ nav li:hover {
     width: 33%;
     height: 80%;
     transform: translate(-50%, -50%); 
-    background-color: white; 
+    background-color: #FFFEF8; 
     padding: 3% 4%; 
 	border-radius: 10px;
 	text-align: center;
