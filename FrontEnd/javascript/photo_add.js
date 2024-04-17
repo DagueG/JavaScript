@@ -18,13 +18,16 @@ export function showAddPhotoModal() {
     modalImage.insertBefore(backButton, modalImage.firstChild);
 
     var title = document.querySelector('.modal-title');
-    title.textContent = "Ajout photo"
+    title.textContent = "Ajout photo";
+    title.classList.add("Add-pic");
 
     var AddPhotoForm = document.createElement('form');
     const AddPhotoFormHTML = `
-        <label for="photo">Photo:</label>
-        <label for="photo">Photo:</label>
+    <div class="modal-content">
+    <i class="fa-regular fa-image"></i>
+    <label for="photo">Photo:</label>
         <input type="file" id="photo" name="image" accept="image/*" required><br><br>
+    </div>
     
         <label for="titre">Titre:</label>
         <input type="text" id="titre" name="title" required><br><br>
