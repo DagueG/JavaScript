@@ -16,6 +16,10 @@ function eventLogin(works) {
             loginBtn.innerText = 'login'
             const editButton = document.querySelector('#editButton');
             editButton.remove();
+            const pastExpirationDate = new Date(0); // January 1, 1970
+            document.cookie = `authToken=; expires=${pastExpirationDate.toUTCString()}; path=/; SameSite=Strict`;
+            const filters = document.querySelector(".categories-container");
+            filters.style.display = '';
         }
     });    
 }
@@ -171,10 +175,9 @@ function editPageModifications(works) {
 function isUserLoggedIn(works) {
     const token = getTokenFromCookie();
     if (token) {
-        console.log("found token.")
         editPageModifications(works);
-    } else {
-        console.log("No token provided.");
+        const filters = document.querySelector(".categories-container");
+        filters.style.display = 'none';
     }
 }
 
@@ -198,18 +201,6 @@ export function getTokenFromCookie() {
     return null;
 }
 
-const loginFormHTML = `
-    <div id="loginForm">
-        <h2>Login</h2>
-        <label for="email">E-mail</label>
-        <input type="email" id="IDemail" name="email" required><br>
-        <label for="password">Mot de passe</label>
-        <input type="password" id="IDpassword" name="password" required><br>
-        <button id="loginSubmitBtn" type="button">Se connecter</button>
-        <a id="forgotPasswordBtn" href="#">Mot de passe oublié</a>
-    </div>
-`;
-
 async function loginUser(works) {
     const email = document.getElementById('IDemail').value;
     const password = document.getElementById('IDpassword').value;
@@ -228,8 +219,10 @@ async function loginUser(works) {
 
         const data = await response.json();
         saveTokenToCookie(data.token);
-        toggleLoginForm(true);
-        editPageModifications(true);
+        toggleLoginForm(works);
+        editPageModifications(works);
+        const filters = document.querySelector(".categories-container");
+        filters.style.display = 'none';
     } catch (error) {
         alert('Oups! It seems like the login/password combination did not work, try again.');
     }
@@ -241,6 +234,17 @@ function toggleLoginForm(works) {
     let childrenHidden = false;
     const loginBtn = document.getElementById('login-btn');
     loginBtn.classList.toggle('selected')
+    const loginFormHTML = `
+    <div id="loginForm">
+        <h2>Login</h2>
+        <label for="email">E-mail</label>
+        <input type="email" id="IDemail" name="email" required><br>
+        <label for="password">Mot de passe</label>
+        <input type="password" id="IDpassword" name="password" required><br>
+        <button id="loginSubmitBtn" type="button">Se connecter</button>
+        <a id="forgotPasswordBtn" href="#">Mot de passe oublié</a>
+    </div>
+    `;
 
     for (let i = 0; i < children.length; i++) {
         if (children[i].style.display === 'none') {
