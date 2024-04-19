@@ -364,10 +364,14 @@ nav li:hover {
 .modal-images-list {
     display: flex;
     flex-wrap: wrap;
-	overflow: scroll;
-	padding-bottom: 50px;
-	border-bottom: 1px solid #B3B3B3;
+	overflow: auto;
+	overflow-y: scroll;
+	scrollbar-width: none;
 	gap: 20px 10px;
+}
+
+.modal-images-list::-webkit-scrollbar {
+	display: none;
 }
 
 .image-container {
@@ -392,11 +396,19 @@ nav li:hover {
 
 .delete-button i {
 	font-size: 11px;
+	padding-top: 3px;
+}
+
+.add-button-container {
+
+    margin-top: auto; /* Aligner en bas */
+    align-self: center; /* Centrer horizontalement */
+	border-top: 1px solid black;
+	padding-top: 50px;
+	width: 100%;
 }
 
 .modal-add-button {
-    margin-top: auto; /* Aligner en bas */
-    align-self: center; /* Centrer horizontalement */
     border: none;
     background-color: #1D6154;
     color: white;
@@ -404,6 +416,7 @@ nav li:hover {
     font-size: 16px;
     border-radius: 60px;
     cursor: pointer;
+
 }
 
 .modal-close-button {

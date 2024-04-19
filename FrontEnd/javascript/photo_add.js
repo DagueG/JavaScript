@@ -4,9 +4,9 @@ export function showAddPhotoModal() {
 
     const modalImage = document.querySelector('.image-modal');
 
-    var backButton = document.createElement('button');
+    let backButton = document.createElement('button');
     backButton.classList.add('back-button');
-    var arrowSpan = document.createElement('img');
+    let arrowSpan = document.createElement('img');
     arrowSpan.src = './assets/icons/arrow-left-solid.svg';
     backButton.appendChild(arrowSpan);
     backButton.onclick = function() {
@@ -17,22 +17,22 @@ export function showAddPhotoModal() {
     };
     modalImage.insertBefore(backButton, modalImage.firstChild);
 
-    var title = document.querySelector('.modal-title');
+    let title = document.querySelector('.modal-title');
     title.textContent = "Ajout photo";
     title.classList.add("Add-pic");
 
-    var AddPhotoForm = document.createElement('form');
+    let AddPhotoForm = document.createElement('form');
     const AddPhotoFormHTML = `
     <div class="modal-content">
     <i class="fa-regular fa-image"></i>
-    <label for="photo">Photo:</label>
+    <label for="photo"></label>
         <input type="file" id="photo" name="image" accept="image/*" required><br><br>
     </div>
     
-        <label for="titre">Titre:</label>
+        <label for="titre">Titre</label>
         <input type="text" id="titre" name="title" required><br><br>
     
-        <label for="categorie">Catégorie:</label>
+        <label for="categorie">Catégories</label>
         <select id="categorie" name="category">
             <option value="1">Catégorie 1</option>
             <option value="2">Catégorie 2</option>
@@ -54,9 +54,9 @@ export function showAddPhotoModal() {
     const token = getTokenFromCookie();
     AddPhotoForm.addEventListener('submit', async function(event) {
         event.preventDefault();
-        var formData = new FormData(AddPhotoForm);
+        let formData = new FormData(AddPhotoForm);
         formData.append('token', token);
-        var headers = new Headers();
+        let headers = new Headers();
         headers.append('Authorization', 'Bearer ' + token);
     
         await fetch('http://localhost:5678/api/works', {

@@ -86,10 +86,10 @@ function genererCategories(works) {
 }
 
 export async function showImageModal(works) {    
-    var modal = document.createElement('div');
+    let modal = document.createElement('div');
     modal.classList.add('image-modal');
     
-    var closeButton = document.createElement('button');
+    let closeButton = document.createElement('button');
     closeButton.innerText = '×';
     closeButton.classList.add('modal-close-button');
     closeButton.onclick = function() {
@@ -98,27 +98,27 @@ export async function showImageModal(works) {
     };
     modal.appendChild(closeButton);
 
-    var modalTitle = document.createElement('h2');
+    let modalTitle = document.createElement('h2');
     modalTitle.classList.add('modal-title');
     modalTitle.innerText = "Galerie photo";
     modal.appendChild(modalTitle);
 
-    var modalImagesList = document.createElement('div');
+    let modalImagesList = document.createElement('div');
     modalImagesList.classList.add('modal-images-list');
-    for (var i = 0; i < works.length; i++) {
-        var imageContainer = document.createElement('div');
+    for (let i = 0; i < works.length; i++) {
+        let imageContainer = document.createElement('div');
         imageContainer.classList.add('image-container');
         imageContainer.dataset.id = works[i].id;
-        var img = document.createElement('img');
+        let img = document.createElement('img');
         img.src = works[i].imageUrl;
         imageContainer.appendChild(img);
 
-        var deleteButton = document.createElement('div');
+        let deleteButton = document.createElement('div');
         deleteButton.classList.add('delete-button');
         deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
         deleteButton.onclick = async function(event) {
             event.preventDefault();
-            var worksID = this.parentElement.dataset.id;
+            let worksID = this.parentElement.dataset.id;
             await deleteImageFromDatabase(worksID);
             const works = await fetchWorks();
             modal.remove();
@@ -130,15 +130,19 @@ export async function showImageModal(works) {
     }
     modal.appendChild(modalImagesList);
 
-    var addPicButton = document.createElement('button');
+    let add_button_container = document.createElement('div');
+    add_button_container.classList.add('add-button-container');
+
+    let addPicButton = document.createElement('button');
     addPicButton.innerText = 'Ajouter une photo';
     addPicButton.classList.add('modal-add-button');
     addPicButton.addEventListener('click', () => {
         showAddPhotoModal(works);
     });
-    modal.appendChild(addPicButton);
-
-    var overlay = document.createElement('div');
+    add_button_container.appendChild(addPicButton);
+    modal.appendChild(add_button_container);
+    
+    let overlay = document.createElement('div');
     overlay.classList.add('overlay');
     document.body.appendChild(overlay);
 
