@@ -106,6 +106,8 @@ li:hover {
 #introduction {
 	display: flex;
 	align-items: center;
+	margin-top: 100px;
+	margin-bottom: 150px;
 }
 #introduction figure {
 	flex: 1
@@ -240,8 +242,9 @@ footer nav ul {
 	padding-bottom:  20px;
 }
 
-#loginForm label {
+#loginForm label, .AddPhotoForm label {
     text-align: left; /* Aligner le texte à gauche */
+	display: flex;
 }
 
 #loginForm input[type="email"],
@@ -269,6 +272,13 @@ footer nav ul {
 
 nav li:hover {
     cursor: pointer;
+}
+
+.gallery figure {
+    display: flex;
+	flex-direction: column;
+    gap: 10px;
+	font-size: 13px;
 }
 
 #project_header {
@@ -299,7 +309,7 @@ nav li:hover {
     width: 33%;
     height: 80%;
     transform: translate(-50%, -50%); 
-    background-color: #FFFEF8; 
+    background-color: white; 
     padding: 3% 4%; 
 	border-radius: 10px;
 	text-align: center;
@@ -382,6 +392,14 @@ nav li:hover {
     height: 100px; /* Largeur de chaque image */
 }
 
+.AddPhotoForm {
+	/* gap: 10px; */
+	justify-content: space-between;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .delete-button {
     position: absolute;
     top: 5px; /* Décalage de 5px du haut de l'image */
@@ -399,8 +417,12 @@ nav li:hover {
 	padding-top: 3px;
 }
 
-.add-button-container {
+.AddPhotoForm .add-button-container {
+	margin-top: 0px;
+	padding-top: 0px;
+}
 
+.add-button-container {
     margin-top: auto; /* Aligner en bas */
     align-self: center; /* Centrer horizontalement */
 	border-top: 1px solid black;

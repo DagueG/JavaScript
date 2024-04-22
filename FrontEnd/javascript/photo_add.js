@@ -3,7 +3,7 @@ import { showImageModal, getTokenFromCookie, fetchWorks } from './user_works.js'
 export function showAddPhotoModal() {
 
     const modalImage = document.querySelector('.image-modal');
-
+    modalImage.classList.add("AddPhotoModale")
     let backButton = document.createElement('button');
     backButton.classList.add('back-button');
     let arrowSpan = document.createElement('img');
@@ -16,6 +16,7 @@ export function showAddPhotoModal() {
         showImageModal(works);
     };
     modalImage.insertBefore(backButton, modalImage.firstChild);
+    document.querySelector('.add-button-container').remove();
 
     let title = document.querySelector('.modal-title');
     title.textContent = "Ajout photo";
@@ -32,14 +33,17 @@ export function showAddPhotoModal() {
         <label for="titre">Titre</label>
         <input type="text" id="titre" name="title" required><br><br>
     
-        <label for="categorie">Catégories</label>
-        <select id="categorie" name="category">
-            <option value="1">Catégorie 1</option>
-            <option value="2">Catégorie 2</option>
-            <option value="3">Catégorie 3</option>
+        <label for="categorie">Catégorie</label>
+        <select id="categorie" name="category" required>
+            <option value="" disabled selected hidden></option>
+            <option value="1">Objets</option>
+            <option value="2">Appartements</option>
+            <option value="3">Hotels & restaurants</option>
         </select><br><br>
-    
-        <input type="submit" value="Valider">
+
+        <div class="add-button-container">
+            <input type="submit" value="Valider" class="modal-add-button">
+        </div>
         `;
     AddPhotoForm.classList.add("AddPhotoForm");
     AddPhotoForm.action = "#";
@@ -49,7 +53,6 @@ export function showAddPhotoModal() {
     modalImage.insertBefore(AddPhotoForm, document.querySelector('.modal-images-list'));
 
     document.querySelector('.modal-images-list').remove();
-    document.querySelector('.modal-add-button').remove();
     
     const token = getTokenFromCookie();
     AddPhotoForm.addEventListener('submit', async function(event) {

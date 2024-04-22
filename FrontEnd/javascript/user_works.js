@@ -16,7 +16,7 @@ function eventLogin(works) {
             loginBtn.innerText = 'login'
             const editButton = document.querySelector('#editButton');
             editButton.remove();
-            const pastExpirationDate = new Date(0); // January 1, 1970
+            const pastExpirationDate = new Date(0);
             document.cookie = `authToken=; expires=${pastExpirationDate.toUTCString()}; path=/; SameSite=Strict`;
             const filters = document.querySelector(".categories-container");
             filters.style.display = '';
@@ -166,7 +166,7 @@ function editPageModifications(works) {
     loginBtn.innerText = 'logout'
 
     const editButton = document.createElement('button');
-    editButton.innerHTML = '<i class="fa-solid fa-pen-to-square icon-modifier"></i> modifier'; // Adding the icon with the class
+    editButton.innerHTML = '<i class="fa-solid fa-pen-to-square icon-modifier"></i> modifier';
     editButton.id = 'editButton';
     editButton.addEventListener('click', function() {
         showImageModal(works);
