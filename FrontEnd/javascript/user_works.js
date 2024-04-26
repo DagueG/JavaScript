@@ -101,6 +101,7 @@ export async function showImageModal(works) {
     let modalTitle = document.createElement('h2');
     modalTitle.classList.add('modal-title');
     modalTitle.innerText = "Galerie photo";
+    modalTitle.classList.add("Add-pic")
     modal.appendChild(modalTitle);
 
     let modalImagesList = document.createElement('div');
