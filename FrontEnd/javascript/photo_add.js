@@ -26,12 +26,14 @@ export function showAddPhotoModal() {
     let AddPhotoForm = document.createElement('form');
     const AddPhotoFormHTML = `
     <div id="modal-content">
+    <div id="origin-content-add">
         <i class="fa-regular fa-image"></i>
         <label for="photo">
             <span class="file_add_button">+ Ajouter photo</span>
             <input type="file" id="photo" name="image" accept="image/*" required><br><br>
         </label>
         <span class="file_add_description">jpg, png : 4mo max</span>
+    </div>
     </div>
     
     <label for="titre">Titre</label>
@@ -77,9 +79,11 @@ export function showAddPhotoModal() {
 
         reader.onload = function(e) {
             const modalContent = document.getElementById('modal-content');
+            const originContentAdd = document.getElementById('origin-content-add');
             const img = document.createElement('img');
             img.src = e.target.result;
-            modalContent.innerHTML = '';
+            originContentAdd.style.display = 'none';
+            // modalContent.innerHTML = '';
             modalContent.style.padding = '0';
             modalContent.appendChild(img);
             checkInputs();
@@ -95,6 +99,7 @@ export function showAddPhotoModal() {
     AddPhotoForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         let formData = new FormData(AddPhotoForm);
+        console.log(formData);
         formData.append('token', token);
         let headers = new Headers();
         headers.append('Authorization', 'Bearer ' + token);

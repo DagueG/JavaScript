@@ -106,18 +106,25 @@ export async function showImageModal(works) {
 
     let modalImagesList = document.createElement('div');
     modalImagesList.classList.add('modal-images-list');
+    // let modalImagesListCont = document.createElement('div');
+    // modalImagesListCont.classList.add('modal-images-list-cont');
+    // modalImagesListCont.appendChild(modalImagesList);
+
     for (let i = 0; i < works.length; i++) {
         let imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+        let subImageContainer = document.createElement('div');
         imageContainer.classList.add('image-container');
         imageContainer.dataset.id = works[i].id;
         let img = document.createElement('img');
         img.src = works[i].imageUrl;
-        imageContainer.appendChild(img);
+        subImageContainer.appendChild(img);
+        imageContainer.appendChild(subImageContainer);
 
         let deleteButton = document.createElement('div');
         deleteButton.classList.add('delete-button');
         deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
-        deleteButton.onclick = async function(event) {
+        deleteButton.onclick = async function (event) {
             event.preventDefault();
             let worksID = this.parentElement.dataset.id;
             await deleteImageFromDatabase(worksID);
@@ -126,9 +133,9 @@ export async function showImageModal(works) {
             overlay.remove();
             showImageModal(works);
         };
-        imageContainer.appendChild(deleteButton);
+        subImageContainer.appendChild(deleteButton);
         modalImagesList.appendChild(imageContainer);
-    }
+    }    // modal.appendChild(modalImagesListCont);
     modal.appendChild(modalImagesList);
 
     let add_button_container = document.createElement('div');

@@ -95,12 +95,14 @@ nav ul {
 	list-style-type: none;
 
 }
-nav li {
+nav li, a{
 	padding: 0 10px;
-	font-size: 1.2em;
+	font-size: 1rem;
+	color: #000;
+	text-decoration: none;
 }
 
-li:hover {
+li:hover, a:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -388,21 +390,42 @@ nav li:hover {
 }
 
 .modal-images-list {
-    display: flex;
-    flex-wrap: wrap;
-	overflow: auto;
-	overflow-y: scroll;
-	scrollbar-width: none;
-	gap: 20px 10px;
-	padding-top: 10px;
-}
+	width: 100%;
+	  display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+	  overflow: auto;
+	  overflow-y: scroll;
+	  scrollbar-width: none;
+	  gap: 20px 10px;
+	  padding-top: 10px;
+  }
+  
+  @media (max-width: 1400px) { 
+	  .modal-images-list {
+		grid-template-columns: repeat(3, 1fr);
+	  }
+  }
+  @media (max-width: 1180px) { 
+	  .modal-images-list {
+		grid-template-columns: repeat(2, 1fr);
+	  }
+  }
+  @media (max-width: 730px) { 
+	  .modal-images-list {
+		grid-template-columns: repeat(1, 1fr);
+	  }
+  }
+  
+  .image-container >div {
+	  position: relative;
+	  width: fit-content;
+	  margin: auto;
+  }
 
 .modal-images-list::-webkit-scrollbar {
 	display: none;
-}
-
-.image-container {
-    position: relative; /* Nécessaire pour positionner le bouton de suppression de manière absolue */
 }
 
 .image-modal img {
