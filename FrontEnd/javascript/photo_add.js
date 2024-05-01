@@ -83,7 +83,6 @@ export function showAddPhotoModal() {
             const img = document.createElement('img');
             img.src = e.target.result;
             originContentAdd.style.display = 'none';
-            // modalContent.innerHTML = '';
             modalContent.style.padding = '0';
             modalContent.appendChild(img);
             checkInputs();

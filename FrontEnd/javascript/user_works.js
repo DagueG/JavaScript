@@ -106,9 +106,6 @@ export async function showImageModal(works) {
 
     let modalImagesList = document.createElement('div');
     modalImagesList.classList.add('modal-images-list');
-    // let modalImagesListCont = document.createElement('div');
-    // modalImagesListCont.classList.add('modal-images-list-cont');
-    // modalImagesListCont.appendChild(modalImagesList);
 
     for (let i = 0; i < works.length; i++) {
         let imageContainer = document.createElement('div');
@@ -135,7 +132,7 @@ export async function showImageModal(works) {
         };
         subImageContainer.appendChild(deleteButton);
         modalImagesList.appendChild(imageContainer);
-    }    // modal.appendChild(modalImagesListCont);
+    }
     modal.appendChild(modalImagesList);
 
     let add_button_container = document.createElement('div');

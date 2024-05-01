@@ -1,8 +1,3 @@
-/* http://meyerweb.com/eric/tools/css/reset/
-   v2.0 | 20110126
-   License: none (public domain)
-*/
-
 * {
 	box-sizing: border-box;
 }
@@ -27,7 +22,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
-/* HTML5 display-role reset for older browsers */
+
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
@@ -50,7 +45,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-/** end reset css**/
+
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -211,7 +206,7 @@ footer nav ul {
 .categories-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Espace entre les boutons */
+    gap: 10px;
 	padding-top: 20px;
 	padding-bottom: 50px;
 }
@@ -237,10 +232,10 @@ footer nav ul {
 }
 
 #loginForm {
-	width: 33%; /* Largeur du formulaire */
-    margin: 0 auto; /* Centre le formulaire horizontalement */
-    text-align: center; /* Centre le texte à l'intérieur du formulaire */
-    padding: 20px; /* Espacement intérieur du formulaire */
+	width: 33%;
+    margin: 0 auto; 
+    text-align: center;
+    padding: 20px;
 	gap: 10px;
     display: flex;
     flex-direction: column;
@@ -259,18 +254,18 @@ footer nav ul {
 }
 
 #loginForm label, .AddPhotoForm label {
-    text-align: left; /* Aligner le texte à gauche */
+    text-align: left;
 	display: flex;
 }
 
 #loginForm input[type="email"],
 #loginForm input[type="password"] {
-    width: 100%; /* Largeur des champs */
-    margin-bottom: 15px; /* Espacement entre chaque champ */
-    padding: 10px; /* Espacement intérieur des champs */
-    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur */
+    width: 100%;
+    margin-bottom: 15px; 
+    padding: 10px;
+    box-sizing: border-box;
 	border: none;
-    box-shadow: 0px 4px 14px 0px #00000017; /* Ajoute une ombre aux champs */
+    box-shadow: 0px 4px 14px 0px #00000017;
 }
 
 #loginForm button {
@@ -301,18 +296,18 @@ nav li:hover {
 #project_header {
 	display: flex;
 	justify-content: center;
-	gap: 30px; /* Marge à gauche pour séparer le bouton "Modifier" du titre */
+	gap: 30px;
 	margin-top: 4em;
 	margin-bottom: 4em;
 }
 
 #editButton {
-	background-color: transparent; /* Supprime le fond */
-    border: none; /* Supprime la bordure */
+	background-color: transparent;
+    border: none;
 }
 
 .icon-modifier {
-    margin-right: 5px; /* Add a right margin to create space */
+    margin-right: 5px;
 }
 
 #editButton:hover {
@@ -343,9 +338,9 @@ nav li:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
-    z-index: 0; /* Assure que l'overlay soit au-dessus des autres éléments */
-    pointer-events: auto; /* Permet aux événements de pointer d'interagir avec cet élément */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+    pointer-events: auto; 
 }
 
 .Add-pic{
@@ -432,7 +427,7 @@ nav li:hover {
 }
 
 .image-modal img {
-    height: 100px; /* Largeur de chaque image */
+    height: 100px;
 }
 
 .AddPhotoForm {
@@ -445,13 +440,13 @@ nav li:hover {
 
 .delete-button {
     position: absolute;
-    top: 5px; /* Décalage de 5px du haut de l'image */
-    right: 5px; /* Décalage de 5px du côté droit de l'image */
-    cursor: pointer; /* Curseur de type pointeur pour indiquer la possibilité de cliquer */
+    top: 5px; 
+    right: 5px;
+    cursor: pointer;
 	width: 17px;
 	height: 17px;
-	background-color: black; /* Set the background color to black */
-    color: white; /* Set the text color to white */
+	background-color: black;
+    color: white; 
 	border-radius: 2px;
 }
 
@@ -466,8 +461,8 @@ nav li:hover {
 }
 
 .add-button-container {
-    margin-top: auto; /* Aligner en bas */
-    align-self: center; /* Centrer horizontalement */
+    margin-top: auto;
+    align-self: center;
 	border-top: 1px solid #B3B3B3;
 	padding-top: 40px;
 	width: 100%;
@@ -511,7 +506,7 @@ nav li:hover {
 }
   
 .modal-close-button:hover {
-	color: #f00; /* Couleur de survol */
+	color: #f00;
 }
   
 .back-button {
