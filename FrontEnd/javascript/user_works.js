@@ -123,7 +123,7 @@ export async function showImageModal(works) {
         deleteButton.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
         deleteButton.onclick = async function (event) {
             event.preventDefault();
-            let worksID = this.parentElement.dataset.id;
+            let worksID = this.parentElement.parentElement.dataset.id;
             await deleteImageFromDatabase(worksID);
             const works = await fetchWorks();
             modal.remove();
@@ -156,6 +156,7 @@ export async function showImageModal(works) {
 
 async function deleteImageFromDatabase(worksID) {
     const token = getTokenFromCookie();
+    console.log(worksID + "       aaaaaaaa   " + token);
     await fetch('http://localhost:5678/api/works/' + worksID, {
         method: 'DELETE',
         headers: {
@@ -233,7 +234,7 @@ async function loginUser(works) {
         const filters = document.querySelector(".categories-container");
         filters.style.display = 'none';
     } catch (error) {
-        alert('Oups! It seems like the login/password combination did not work, try again.');
+        // alert('Oups! It seems like the login/password combination did not work, try again.');
     }
 }
 
