@@ -236,8 +236,16 @@ async function loginUser(works) {
         const filters = document.querySelector(".categories-container");
         filters.style.display = 'none';
     } catch (error) {
-        // alert('Oups! It seems like the login/password combination did not work, try again.');
+        errorLogin();
     }
+}
+
+function errorLogin() {
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = 'Erreur de connexion. Veuillez réessayer.';
+    errorMessage.style.color = 'red';
+    const loginForm = document.getElementById('loginForm');
+    loginForm.appendChild(errorMessage);
 }
 
 function toggleLoginForm(works) {
