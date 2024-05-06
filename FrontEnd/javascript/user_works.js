@@ -20,6 +20,10 @@ function eventLogin(works) {
             document.cookie = `authToken=; expires=${pastExpirationDate.toUTCString()}; path=/; SameSite=Strict`;
             const filters = document.querySelector(".categories-container");
             filters.style.display = '';
+            const editModeTop = document.getElementById('EditModeTop');
+            editModeTop.remove();
+            const header = document.querySelector('header');
+            header.style.marginTop = '';
         }
     });    
 }
@@ -182,6 +186,21 @@ function editPageModifications() {
 
     const h2Element = headerSection.querySelector('h2');
     h2Element.parentNode.insertBefore(editButton, h2Element.nextSibling);
+
+    const editModeTop = document.createElement('div');
+    editModeTop.id = 'EditModeTop';
+    editModeTop.innerHTML = '<i class="fa-solid fa-pen-to-square icon-modifier"></i> Mode édition';
+    document.body.insertBefore(editModeTop, document.body.firstChild);
+
+    const header = document.querySelector('header');
+    const currentMarginTop = parseInt(window.getComputedStyle(header).marginTop);
+
+    // Ajouter 60 pixels à la marge supérieure actuelle
+    const newMarginTop = currentMarginTop + 60;
+    
+    // Appliquer la nouvelle marge supérieure
+    header.style.marginTop = newMarginTop + 'px';
+    
 }
 
 function isUserLoggedIn(works) {

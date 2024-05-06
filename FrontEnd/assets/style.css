@@ -301,6 +301,18 @@ nav li:hover {
 	margin-bottom: 4em;
 }
 
+#EditModeTop {
+    background-color: black;
+    color: white;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+	text-align: center;
+	padding: 21px;
+	font-size: 16px;
+}
+
 #editButton {
 	background-color: transparent;
     border: none;
