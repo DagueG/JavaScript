@@ -24,7 +24,7 @@ function eventLogin(works) {
     });    
 }
 
-function genererWork(works) {
+export function genererWork(works) {
     const sectionFiches = document.querySelector(".gallery");
     sectionFiches.innerHTML = "";
     for (let i = 0; i < works.length; i++) {
@@ -128,6 +128,7 @@ export async function showImageModal(works) {
             const works = await fetchWorks();
             modal.remove();
             overlay.remove();
+            genererWork(works);
             showImageModal(works);
         };
         subImageContainer.appendChild(deleteButton);
@@ -165,7 +166,7 @@ async function deleteImageFromDatabase(worksID) {
     })
 }
 
-function editPageModifications(works) {
+function editPageModifications() {
     const loginBtn = document.getElementById('login-btn');
     const headerSection = document.getElementById('project_header');
 
@@ -174,7 +175,8 @@ function editPageModifications(works) {
     const editButton = document.createElement('button');
     editButton.innerHTML = '<i class="fa-solid fa-pen-to-square icon-modifier"></i> modifier';
     editButton.id = 'editButton';
-    editButton.addEventListener('click', function() {
+    editButton.addEventListener('click', async function() {
+        const works = await fetchWorks();
         showImageModal(works);
     });
 
@@ -185,7 +187,7 @@ function editPageModifications(works) {
 function isUserLoggedIn(works) {
     const token = getTokenFromCookie();
     if (token) {
-        editPageModifications(works);
+        editPageModifications();
         const filters = document.querySelector(".categories-container");
         filters.style.display = 'none';
     }
@@ -230,7 +232,7 @@ async function loginUser(works) {
         const data = await response.json();
         saveTokenToCookie(data.token);
         toggleLoginForm(works);
-        editPageModifications(works);
+        editPageModifications();
         const filters = document.querySelector(".categories-container");
         filters.style.display = 'none';
     } catch (error) {

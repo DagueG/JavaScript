@@ -1,4 +1,4 @@
-import { showImageModal, getTokenFromCookie, fetchWorks } from './user_works.js'
+import { showImageModal, getTokenFromCookie, fetchWorks, genererWork } from './user_works.js'
 
 export function showAddPhotoModal() {
     const modalImage = document.querySelector('.image-modal');
@@ -98,7 +98,6 @@ export function showAddPhotoModal() {
     AddPhotoForm.addEventListener('submit', async function(event) {
         event.preventDefault();
         let formData = new FormData(AddPhotoForm);
-        console.log(formData);
         formData.append('token', token);
         let headers = new Headers();
         headers.append('Authorization', 'Bearer ' + token);
@@ -112,6 +111,7 @@ export function showAddPhotoModal() {
         document.querySelector('.overlay').remove();
         modalImage.remove();
         const works = await fetchWorks();
+        genererWork(works);
         showImageModal(works);
     });
 }
